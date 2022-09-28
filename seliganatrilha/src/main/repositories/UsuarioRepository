@@ -1,0 +1,4 @@
+@Repository
+public interface Usuario extend JpaRepository<Usuario, UUID>{
+
+}
