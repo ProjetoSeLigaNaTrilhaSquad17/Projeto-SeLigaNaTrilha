@@ -1,24 +1,29 @@
+package com.unit17.seliganatrilha.models;
+
+import javax.persistence.*;
 import java.lang.annotation.Inherited;
 import java.util.UUID;
 
 @Entity
-@Table(Name = "tb_usuario")
+@Table(name = "TB_USUARIO")
 public class Usuario{
-    @ID
-    @GeneratedValue(Strategy=GenerationType.auto)
-    @Collumn(Nullable = false, Unique = true)
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(nullable = false, unique = true)
     private UUID id;
-    @Collumn(Nullable = false, Unique = true)
+    @Column(nullable = false, unique = true)
     private String nome;
-    @Collumn(Nullable = false, Unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
-    @Collumn(Nullable = false, Unique = true)
+    @Column(nullable = false, unique = true)
     private String cpf;
-    @Collumn(Nullable = false, Unique = true)
+    @Column(nullable = false, unique = true)
     private String senha;
-    
 
-    public Usuario(int id, String nome, String email, String cpf, String senha) {
+    public Usuario() {
+    }
+
+    public Usuario(UUID id, String nome, String email, String cpf, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -26,11 +31,11 @@ public class Usuario{
         this.senha = senha;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

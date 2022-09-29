@@ -1,14 +1,15 @@
-package controllers;
+package com.unit17.seliganatrilha.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.unit17.seliganatrilha.models.Usuario;
+import com.unit17.seliganatrilha.repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import services.UsuarioServices;
+import java.util.List;
+
 
 @RestController
-@CrossOrigin(Origins="*", MaxAge=3600)
+@CrossOrigin(origins="*", maxAge=3600)
 @RequestMapping("/usuario")
 public class UsuarioController {
     @Autowired
@@ -16,7 +17,7 @@ public class UsuarioController {
     
     @GetMapping
     public List<Usuario> findAll(){
-        usuarioRepo.findAll();
+        return usuarioRepository.findAll();
     }
 
     @PostMapping
