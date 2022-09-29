@@ -1,5 +1,6 @@
 package com.unit17.seliganatrilha.controllers;
 
+import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +25,13 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public String save(@RequestBody Usuario novoUsuario){
+    public String save(@RequestBody UsuarioDto novoUsuario){
         usuarioService.save(novoUsuario);
         return "Novo usuário cadastrado com sucesso!";
     }
 
     @PutMapping
-    public String update(@RequestBody Usuario usuarioAtualizar){
+    public String update(@RequestBody UsuarioDto usuarioAtualizar){
         usuarioService.save(usuarioAtualizar);
         return "Dados de usuário atualizados com sucesso!";
     }

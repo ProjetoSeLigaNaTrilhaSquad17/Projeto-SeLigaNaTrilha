@@ -1,5 +1,6 @@
 package com.unit17.seliganatrilha.service;
 
+import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public class UsuarioService {
     }
 
     @Transactional
-    public void save(Usuario novoUsuario) {
+    public void save(UsuarioDto novoUsuarioDto) {
+        Usuario novoUsuario = new Usuario(novoUsuarioDto.getNome(), novoUsuarioDto.getEmail(), novoUsuarioDto.getCpf(), novoUsuarioDto.getSenha());
         usuarioRepository.save(novoUsuario);
     }
 
