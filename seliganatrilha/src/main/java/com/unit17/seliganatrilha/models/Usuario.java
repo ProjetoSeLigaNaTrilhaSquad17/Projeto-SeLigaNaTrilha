@@ -1,7 +1,6 @@
 package com.unit17.seliganatrilha.models;
 
 import javax.persistence.*;
-import java.lang.annotation.Inherited;
 import java.util.UUID;
 
 @Entity
@@ -23,8 +22,7 @@ public class Usuario{
     public Usuario() {
     }
 
-    public Usuario(UUID id, String nome, String email, String cpf, String senha) {
-        this.id = id;
+    public Usuario(String nome, String email, String cpf, String senha) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
