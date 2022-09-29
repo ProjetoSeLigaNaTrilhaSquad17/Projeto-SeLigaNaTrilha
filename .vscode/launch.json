@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-SeliganatrilhaApplication<seliganatrilha>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.unit17.seliganatrilha.SeliganatrilhaApplication",
+      "projectName": "seliganatrilha",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
