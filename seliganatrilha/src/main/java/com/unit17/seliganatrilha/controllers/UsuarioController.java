@@ -1,8 +1,7 @@
 package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.models.Usuario;
-import com.unit17.seliganatrilha.repositories.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.unit17.seliganatrilha.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,29 +11,33 @@ import java.util.List;
 @CrossOrigin(origins="*", maxAge=3600)
 @RequestMapping("/usuario")
 public class UsuarioController {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-    
+
+    final UsuarioService usuarioService;
+
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
     @GetMapping
     public List<Usuario> findAll(){
-        return usuarioRepository.findAll();
+        return usuarioService.findAll();
     }
 
     @PostMapping
     public String save(@RequestBody Usuario novoUsuario){
-        usuarioRepository.save(novoUsuario);
+        usuarioService.save(novoUsuario);
         return "Novo usuário cadastrado com sucesso!";
     }
 
     @PutMapping
     public String update(@RequestBody Usuario usuarioAtualizar){
-        usuarioRepository.save(usuarioAtualizar);
+        usuarioService.save(usuarioAtualizar);
         return "Dados de usuário atualizados com sucesso!";
     }
 
     @DeleteMapping
     public String delete(@RequestBody Usuario usuarioDeletar){
-            usuarioRepository.delete(usuarioDeletar);
+        usuarioService.delete(usuarioDeletar);
             return "Usuário deletado com sucesso!";
     }
 

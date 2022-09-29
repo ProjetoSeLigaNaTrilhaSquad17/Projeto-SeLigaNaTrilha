@@ -1,7 +1,6 @@
 package com.unit17.seliganatrilha.models;
 
 import javax.persistence.*;
-import java.lang.annotation.Inherited;
 import java.util.UUID;
 
 @Entity
