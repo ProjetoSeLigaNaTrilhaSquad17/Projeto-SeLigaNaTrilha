@@ -4,6 +4,7 @@ import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.models.Usuario;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface UsuarioService {
 
@@ -11,5 +12,7 @@ public interface UsuarioService {
 
     void save(UsuarioDto novoUsuarioDto);
 
-    void delete(Usuario usuarioDeletar);
+    void update(UUID id, UsuarioDto novoUsuario);
+
+    void delete(UUID id);
 }
