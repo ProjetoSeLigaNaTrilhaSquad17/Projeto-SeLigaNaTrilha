@@ -2,8 +2,10 @@ package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.repositories.TrilhaRepository;
 import com.unit17.seliganatrilha.models.Trilha;
+import com.unit17.seliganatrilha.dtos.TrilhaDto;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,19 +29,24 @@ public class TrilhaController {
     public List<Trilha> findAll(){
         return trilhaRepository.findAll();
     }
+
+    @GetMapping("/trilha/{idTrilha}")
+    public TrilhaRepository findById(UUID id){
+        return trilhaRepository.findById(id);
+    }
     
     @PostMapping
-    public String save(@RequestBody Trilha trilhaNova){
+    public String save(@RequestBody TrilhaDto trilhaNova){
         return "Trilha criada com sucesso.";
     }
 
     @PutMapping
-    public String update(@RequestBody Trilha trilhaAtualizar){
+    public String update(@RequestBody TrilhaDto trilhaAtualizar){
         return "Trilha atualizada com sucesso.";
     }
     
     @DeleteMapping
-    public String delete(@RequestBody Trilha trilhaDeletar){
+    public String delete(@RequestBody TrilhaDto trilhaDeletar){
         return "Trilha deletada com sucesso.";
     }
 }
