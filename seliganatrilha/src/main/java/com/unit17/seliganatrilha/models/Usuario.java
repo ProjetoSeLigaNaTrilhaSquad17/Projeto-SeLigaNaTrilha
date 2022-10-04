@@ -3,6 +3,7 @@ package com.unit17.seliganatrilha.models;
 import javax.persistence.*;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
@@ -12,6 +13,8 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "TB_USUARIO")
+
+@NoArgsConstructor
 public class Usuario{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -25,9 +28,6 @@ public class Usuario{
     private String cpf;
     @Column(nullable = false)
     private String senha;
-
-    public Usuario() {
-    }
 
     public Usuario(String nome, String email, String cpf, String senha) {
         this.nome = nome;

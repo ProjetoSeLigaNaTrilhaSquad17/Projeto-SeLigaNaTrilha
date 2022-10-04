@@ -30,7 +30,8 @@ public class UsuarioServiceImpl implements UsuarioService {
                 novoUsuarioDto.getNome(),
                 novoUsuarioDto.getEmail(),
                 novoUsuarioDto.getCpf(),
-                novoUsuarioDto.getSenha());
+                novoUsuarioDto.getSenha()
+        );
         usuarioRepository.save(novoUsuario);
     }
 
