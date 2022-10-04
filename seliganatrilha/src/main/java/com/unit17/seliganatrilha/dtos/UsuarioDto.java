@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class UsuarioDto {
 
     @NotBlank(message = "O nome não pode ser vazio")

@@ -2,33 +2,17 @@ package com.unit17.seliganatrilha.service;
 
 import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.models.Usuario;
-import com.unit17.seliganatrilha.repositories.UsuarioRepository;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
-@Service
-public class UsuarioService {
+public interface UsuarioService {
 
-    final UsuarioRepository usuarioRepository;
+    List<Usuario> findAll();
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
+    void save(UsuarioDto novoUsuarioDto);
 
-    public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
-    }
+    void update(UUID id, UsuarioDto novoUsuario);
 
-    @Transactional
-    public void save(UsuarioDto novoUsuarioDto) {
-        Usuario novoUsuario = new Usuario(novoUsuarioDto.getNome(), novoUsuarioDto.getEmail(), novoUsuarioDto.getCpf(), novoUsuarioDto.getSenha());
-        usuarioRepository.save(novoUsuario);
-    }
-
-    @Transactional
-    public void delete(Usuario usuarioDeletar) {
-        usuarioRepository.delete(usuarioDeletar);
-    }
+    void delete(UUID id);
 }

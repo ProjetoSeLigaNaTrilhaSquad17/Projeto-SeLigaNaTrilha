@@ -3,19 +3,22 @@ package com.unit17.seliganatrilha.models;
 import javax.persistence.*;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import java.util.UUID;
 
 @Getter
 @Setter
-
 @Entity
 @Table(name = "TB_USUARIO")
+
+@NoArgsConstructor
 public class Usuario{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(nullable = false, unique = true)
+    @Type(type="org.hibernate.type.UUIDCharType")
     private UUID id;
     @Column(nullable = false, unique = true)
     private String nome;
@@ -23,11 +26,8 @@ public class Usuario{
     private String email;
     @Column(nullable = false, unique = true)
     private String cpf;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String senha;
-
-    public Usuario() {
-    }
 
     public Usuario(String nome, String email, String cpf, String senha) {
         this.nome = nome;

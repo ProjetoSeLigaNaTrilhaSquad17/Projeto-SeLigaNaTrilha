@@ -1,33 +1,32 @@
 package com.unit17.seliganatrilha.controllers;
 
-import com.unit17.seliganatrilha.repositories.TrilhaRepository;
+import com.unit17.seliganatrilha.dtos.TrilhaDto;
+import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.dtos.TrilhaDto;
 
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.unit17.seliganatrilha.service.TrilhaService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins="*", maxAge=3600)
 @RequestMapping("/trilha")
 public class TrilhaController {
-    
-    @Autowired
-    private TrilhaRepository trilhaRepository;
+
+    final TrilhaService trilhaService;
+
+    public TrilhaController(TrilhaService trilhaService) {
+        this.trilhaService = trilhaService;
+    }
 
     @GetMapping
     public List<Trilha> findAll(){
-        return trilhaRepository.findAll();
+        return trilhaService.findAll();
     }
 
     @GetMapping("/trilha/{idTrilha}")
@@ -36,17 +35,28 @@ public class TrilhaController {
     }
     
     @PostMapping
-    public String save(@RequestBody TrilhaDto trilhaNova){
-        return "Trilha criada com sucesso.";
+    public ResponseEntity<String> save(@RequestBody TrilhaDto trilhaNova){
+        trilhaService.save(trilhaNova);
+        return ResponseEntity.status(HttpStatus.OK).body("Trilha cadastrada com sucesso");
     }
 
-    @PutMapping
-    public String update(@RequestBody TrilhaDto trilhaAtualizar){
-        return "Trilha atualizada com sucesso.";
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable (value = "id") UUID id, @RequestBody TrilhaDto trilhaAtualizar){
+        try {
+            trilhaService.update(id, trilhaAtualizar);
+        } catch (TrilhaNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Trilha atualizada com sucesso.");
     }
     
-    @DeleteMapping
-    public String delete(@RequestBody TrilhaDto trilhaDeletar){
-        return "Trilha deletada com sucesso.";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable (value = "id") UUID id){
+        try {
+            trilhaService.delete(id);
+        } catch (TrilhaNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Trilha deletada com sucesso.");
     }
 }
