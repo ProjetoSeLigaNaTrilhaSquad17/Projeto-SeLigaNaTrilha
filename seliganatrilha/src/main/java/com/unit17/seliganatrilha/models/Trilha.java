@@ -1,13 +1,13 @@
 package com.unit17.seliganatrilha.models;
 
 import javax.persistence.*;
-import java.util.UUID;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "TB_TRILHA")
@@ -15,14 +15,19 @@ import org.hibernate.annotations.Type;
 @Setter
 @NoArgsConstructor
 public class Trilha {
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type="org.hibernate.type.UUIDCharType")
-    private UUID idcurso;
+    @Column(nullable = false, unique = true)
+    private UUID idTrilha;
+
     @Column(nullable = false, unique = true)
     private String nome;
+    
     @Column(nullable = false, unique = true)
     private String comentario;
+    
     @Column(nullable = false, unique = true)
     private String status;
 

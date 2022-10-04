@@ -3,6 +3,7 @@ package com.unit17.seliganatrilha.controllers;
 import com.unit17.seliganatrilha.dtos.TrilhaDto;
 import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
 import com.unit17.seliganatrilha.models.Trilha;
+import com.unit17.seliganatrilha.dtos.TrilhaDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,6 +27,11 @@ public class TrilhaController {
     @GetMapping
     public List<Trilha> findAll(){
         return trilhaService.findAll();
+    }
+
+    @GetMapping("/trilha/{idTrilha}")
+    public TrilhaRepository findById(UUID id){
+        return trilhaRepository.findById(id);
     }
     
     @PostMapping
