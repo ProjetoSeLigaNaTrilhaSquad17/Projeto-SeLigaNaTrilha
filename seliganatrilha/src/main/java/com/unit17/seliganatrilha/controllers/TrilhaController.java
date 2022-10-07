@@ -30,8 +30,8 @@ public class TrilhaController {
     }
 
     @GetMapping("/trilha/{idTrilha}")
-    public TrilhaRepository findById(UUID id){
-        return trilhaRepository.findById(id);
+    public ResponseEntity<Trilha> findById(UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(trilhaService.findById(id));
     }
     
     @PostMapping

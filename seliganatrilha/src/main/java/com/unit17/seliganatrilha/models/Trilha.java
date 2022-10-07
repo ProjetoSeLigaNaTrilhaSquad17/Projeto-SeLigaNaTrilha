@@ -25,15 +25,15 @@ public class Trilha {
     @Column(nullable = false, unique = true)
     private String nome;
     
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String comentario;
     
-    @Column(nullable = false, unique = true)
-    private String status;
+    @Column(nullable = false)
+    private Boolean status;
 
-    public Trilha(String nome, String comentario, String status) {
+    public Trilha(String nome, String comentario) {
         this.nome = nome;
         this.comentario = comentario;
-        this.status = status;
+        this.status = false;
     }
 }

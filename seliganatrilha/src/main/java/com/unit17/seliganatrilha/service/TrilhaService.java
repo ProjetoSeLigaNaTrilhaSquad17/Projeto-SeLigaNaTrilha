@@ -4,6 +4,7 @@ import com.unit17.seliganatrilha.dtos.TrilhaDto;
 import com.unit17.seliganatrilha.models.Trilha;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface TrilhaService {
@@ -15,4 +16,6 @@ public interface TrilhaService {
     void update(UUID id, TrilhaDto novoaTrilha);
 
     void delete(UUID id);
+
+    Trilha findById(UUID id);
 }

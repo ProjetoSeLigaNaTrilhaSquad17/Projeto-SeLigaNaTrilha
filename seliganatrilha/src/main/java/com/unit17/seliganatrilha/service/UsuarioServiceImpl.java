@@ -26,13 +26,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Transactional
     public void save(UsuarioDto novoUsuarioDto) {
-        Usuario novoUsuario = new Usuario(
-                novoUsuarioDto.getNome(),
-                novoUsuarioDto.getEmail(),
-                novoUsuarioDto.getCpf(),
-                novoUsuarioDto.getSenha()
-        );
-        usuarioRepository.save(novoUsuario);
+        usuarioRepository.save(novoUsuarioDto.convertToUsuario());
     }
 
     @Transactional
