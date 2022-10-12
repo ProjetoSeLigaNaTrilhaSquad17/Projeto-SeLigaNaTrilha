@@ -12,10 +12,10 @@ public class TrilhaDto {
     @NotBlank(message  = "O nome não pode ser vazio.")
     private String nome;
     
-    @NotBlank(message = "Digite ao menos um breve comentário sobre a trilha.")
-    private String comentario;
+    @NotBlank(message = "Digite uma breve descrição sobre a trilha.")
+    private String descricao;
 
     public Trilha convertToTrilha(){
-        return new Trilha(this.nome, this.comentario);
+        return new Trilha(this.nome, this.descricao);
     }
 }

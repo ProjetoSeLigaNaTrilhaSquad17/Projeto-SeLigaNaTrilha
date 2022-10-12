@@ -15,4 +15,5 @@ public interface UsuarioService {
     void update(UUID id, UsuarioDto novoUsuario);
 
     void delete(UUID id);
+
 }

@@ -26,18 +26,18 @@ public class Trilha {
     private String nome;
     
     @Column(nullable = false)
-    private String comentario;
+    private String descricao;
     
     @Column(nullable = false)
     private Boolean status;
-    
+
     //Relacionamento n - 1
     //@ManyToOne
     //@JoinColumn(name = "Usuario_id")
     //Usuario usuarioId;
     public Trilha(String nome, String comentario, String status) {
         this.nome = nome;
-        this.comentario = comentario;
+        this.descricao = descricao;
         this.status = false;
     }
 }
