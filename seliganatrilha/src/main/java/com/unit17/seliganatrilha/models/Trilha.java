@@ -35,7 +35,7 @@ public class Trilha {
     //@ManyToOne
     //@JoinColumn(name = "Usuario_id")
     //Usuario usuarioId;
-    public Trilha(String nome, String comentario, String status) {
+    public Trilha(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
         this.status = false;
