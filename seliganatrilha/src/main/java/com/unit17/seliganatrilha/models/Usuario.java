@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -28,6 +29,10 @@ public class Usuario{
     private String cpf;
     @Column(nullable = false)
     private String senha;
+    
+    // Relacionamento 0 - n
+    //@NoneToMany(cascade = CascadeType.ALL)
+    //private Set<Trilha> trilhaId; 
 
     public Usuario(String nome, String email, String cpf, String senha) {
         this.nome = nome;

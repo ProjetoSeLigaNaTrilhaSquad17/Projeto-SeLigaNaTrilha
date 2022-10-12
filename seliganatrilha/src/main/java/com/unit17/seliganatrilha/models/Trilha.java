@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -32,7 +31,11 @@ public class Trilha {
     @Column(nullable = false)
     private Boolean status;
 
-    public Trilha(String nome, String descricao) {
+    //Relacionamento n - 1
+    //@ManyToOne
+    //@JoinColumn(name = "Usuario_id")
+    //Usuario usuarioId;
+    public Trilha(String nome, String comentario, String status) {
         this.nome = nome;
         this.descricao = descricao;
         this.status = false;
