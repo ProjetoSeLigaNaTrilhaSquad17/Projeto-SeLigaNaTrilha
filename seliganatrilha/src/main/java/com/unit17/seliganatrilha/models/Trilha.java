@@ -30,8 +30,12 @@ public class Trilha {
     
     @Column(nullable = false)
     private Boolean status;
-
-    public Trilha(String nome, String comentario) {
+    
+    //Relacionamento n - 1
+    //@ManyToOne
+    //@JoinColumn(name = "Usuario_id")
+    //Usuario usuarioId;
+    public Trilha(String nome, String comentario, String status) {
         this.nome = nome;
         this.comentario = comentario;
         this.status = false;
