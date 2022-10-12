@@ -23,11 +23,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping
-    public List<Usuario> findAll(){
-        return usuarioService.findAll();
-    }
-
     @PostMapping
     public ResponseEntity<String> save(@RequestBody UsuarioDto novoUsuario){
         usuarioService.save(novoUsuario);

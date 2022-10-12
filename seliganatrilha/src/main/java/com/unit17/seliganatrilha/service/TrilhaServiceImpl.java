@@ -2,7 +2,6 @@ package com.unit17.seliganatrilha.service;
 
 import com.unit17.seliganatrilha.dtos.TrilhaDto;
 import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
-import com.unit17.seliganatrilha.exceptions.UsuarioNaoEncontradoException;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.repositories.TrilhaRepository;
 import org.springframework.stereotype.Service;
@@ -38,7 +37,7 @@ public class TrilhaServiceImpl implements TrilhaService {
         }
         Trilha antigaTrilha = trilha.get();
         antigaTrilha.setNome(novaTrilha.getNome());
-        antigaTrilha.setComentario(novaTrilha.getComentario());
+        antigaTrilha.setDescricao(novaTrilha.getDescricao());
     }
 
     @Transactional

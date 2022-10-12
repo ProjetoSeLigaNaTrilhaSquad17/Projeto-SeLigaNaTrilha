@@ -8,8 +8,6 @@ import java.util.UUID;
 
 public interface UsuarioService {
 
-    List<Usuario> findAll();
-
     void save(UsuarioDto novoUsuarioDto);
 
     void update(UUID id, UsuarioDto novoUsuario);

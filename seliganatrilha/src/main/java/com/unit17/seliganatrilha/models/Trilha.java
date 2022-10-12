@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,14 +27,14 @@ public class Trilha {
     private String nome;
     
     @Column(nullable = false)
-    private String comentario;
+    private String descricao;
     
     @Column(nullable = false)
     private Boolean status;
 
-    public Trilha(String nome, String comentario) {
+    public Trilha(String nome, String descricao) {
         this.nome = nome;
-        this.comentario = comentario;
+        this.descricao = descricao;
         this.status = false;
     }
 }
