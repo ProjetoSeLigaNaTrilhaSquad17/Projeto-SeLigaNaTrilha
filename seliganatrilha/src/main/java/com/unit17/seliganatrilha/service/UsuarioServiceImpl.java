@@ -20,6 +20,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    @Override
+    public List<Usuario> findAll() {  return usuarioRepository.findAll();  }
+
     @Transactional
     public void save(UsuarioDto novoUsuarioDto) {
         usuarioRepository.save(novoUsuarioDto.convertToUsuario());
