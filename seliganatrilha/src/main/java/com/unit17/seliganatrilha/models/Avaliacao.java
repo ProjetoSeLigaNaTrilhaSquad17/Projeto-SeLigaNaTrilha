@@ -2,8 +2,8 @@ package com.unit17.seliganatrilha.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @Table(name = "TB_AVALIACAO")
 @NoArgsConstructor
-public class Avaliacao {
+public class Avaliacao{
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue

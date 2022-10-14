@@ -20,7 +20,7 @@ public class Usuario{
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Type(type="org.hibernate.type.UUIDCharType")
     private UUID id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = false)
     private String nome;
     @Column(nullable = false, unique = true)
     private String email;
@@ -28,10 +28,6 @@ public class Usuario{
     private String cpf;
     @Column(nullable = false)
     private String senha;
-    
-    // Relacionamento 0 - n
-    //@NoneToMany(cascade = CascadeType.ALL)
-    //private Set<Trilha> trilhaId; 
 
     public Usuario(String nome, String email, String cpf, String senha) {
         this.nome = nome;

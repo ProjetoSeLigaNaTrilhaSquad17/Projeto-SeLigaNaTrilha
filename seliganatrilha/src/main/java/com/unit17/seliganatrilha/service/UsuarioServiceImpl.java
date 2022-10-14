@@ -21,7 +21,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<Usuario> findAll() {  return usuarioRepository.findAll();  }
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
+    }
 
     @Transactional
     public void save(UsuarioDto novoUsuarioDto) {
