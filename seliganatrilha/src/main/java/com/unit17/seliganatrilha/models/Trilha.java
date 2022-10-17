@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Type;
 
 import java.util.UUID;
@@ -31,10 +32,10 @@ public class Trilha {
     @Column(nullable = false)
     private Boolean status;
 
-    //Relacionamento n - 1
-    //@ManyToOne
-    //@JoinColumn(name = "Usuario_id")
-    //Usuario usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @ToString.Exclude
+    Usuario usuario;
     public Trilha(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;

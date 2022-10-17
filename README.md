@@ -40,6 +40,6 @@ Para rodar essa aplicação, é necessário ter instalado o Java (Versão 17), u
 ````
 {
     "nome" : "Nome Exemplo",
-    "descricao" : "Descrição do conteúdo presente na trilha",
+    "descricao" : "Descrição do conteúdo presente na trilha"
 }
 ````

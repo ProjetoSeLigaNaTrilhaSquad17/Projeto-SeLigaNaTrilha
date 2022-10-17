@@ -33,9 +33,9 @@ public class TrilhaController {
         return ResponseEntity.status(HttpStatus.OK).body(trilhaService.findById(id));
     }
     
-    @PostMapping
-    public ResponseEntity<String> save(@RequestBody TrilhaDto trilhaNova){
-        trilhaService.save(trilhaNova);
+    @PostMapping("/{id}")
+    public ResponseEntity<String> save(@PathVariable (value = "id") UUID id, @RequestBody TrilhaDto trilhaNova){
+        trilhaService.save(trilhaNova, id);
         return ResponseEntity.status(HttpStatus.OK).body("Trilha cadastrada com sucesso");
     }
 
