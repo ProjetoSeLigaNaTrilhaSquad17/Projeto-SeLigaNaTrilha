@@ -1,5 +1,6 @@
 package com.unit17.seliganatrilha.controllers;
 
+import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unit17.seliganatrilha.dtos.AvaliacaoDto;
@@ -41,28 +42,26 @@ public class AvaliacaoController {
     @PostMapping
     public ResponseEntity<String> save(@RequestBody AvaliacaoDto novaAvaliacao){
         avaliacaoService.save(novaAvaliacao);
-        return ResponseEntity.status(HttpStatus.OK).body(body: "Sua avaliaçào foi realizada com sucesso");
+        return ResponseEntity.status(HttpStatus.OK).body("Sua avaliaçào foi realizada com sucesso");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> update(@PathVariable(value = "id") UUID id, @RequestBody AvaliacaoDto avaliacaoAtualizar){
         try {
-            avaliacaoService.delete(id, avaliacaoAtualizar);
-        }
-        catch (AvaliacaoNaoEncontrada e) {
+            avaliacaoService.update(id, avaliacaoAtualizar);
+        } catch (AvaliacaoNaoEncontradaException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.OK).body(body: "Sua avaliaçào foi atualizada com sucesso.");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @DeleteMapping{/{id}}
-    public ResponseEntity<String> delete(PathVarialble(value="id") UUID id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable(value="id") UUID id){
         try {
-            avaliacao.service(id);    
+            avaliacaoService.delete(id);
+        } catch (AvaliacaoNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        catch (AvaliacaoNaoEncontrada e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(body: "Avaliação excluída com sucesso.");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

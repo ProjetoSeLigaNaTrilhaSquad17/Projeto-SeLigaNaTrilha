@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter
@@ -28,6 +28,9 @@ public class Usuario{
     private String cpf;
     @Column(nullable = false)
     private String senha;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private Set<Trilha> trilhas = new HashSet<>();
 
     public Usuario(String nome, String email, String cpf, String senha) {
         this.nome = nome;

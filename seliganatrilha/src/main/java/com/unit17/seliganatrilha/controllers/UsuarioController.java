@@ -2,6 +2,7 @@ package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.exceptions.UsuarioNaoEncontradoException;
+import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.service.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -26,6 +28,11 @@ public class UsuarioController {
     @GetMapping
     public List<Usuario> findAll(){
         return usuarioService.findAll();
+    }
+
+    @GetMapping("/{id}/trilhas")
+    public Set<String> findTrilhas(@PathVariable(value = "id") UUID id){
+        return usuarioService.findTrilhas(id);
     }
 
     @PostMapping
@@ -51,7 +58,7 @@ public class UsuarioController {
         } catch (UsuarioNaoEncontradoException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Usuário deletado com sucesso");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Usuário deletado com sucesso");
     }
 
 }

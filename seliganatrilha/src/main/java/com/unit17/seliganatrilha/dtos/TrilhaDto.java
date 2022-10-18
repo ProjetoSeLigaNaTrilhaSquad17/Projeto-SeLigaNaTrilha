@@ -3,6 +3,7 @@ package com.unit17.seliganatrilha.dtos;
 import javax.validation.constraints.NotBlank;
 
 import com.unit17.seliganatrilha.models.Trilha;
+import com.unit17.seliganatrilha.models.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ public class TrilhaDto {
     
     @NotBlank(message = "Digite uma breve descrição sobre a trilha.")
     private String descricao;
+
 
     public Trilha convertToTrilha(){
         return new Trilha(this.nome, this.descricao);

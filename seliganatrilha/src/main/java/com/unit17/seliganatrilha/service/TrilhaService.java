@@ -10,7 +10,7 @@ public interface TrilhaService {
 
     List<Trilha> findAll();
 
-    void save(TrilhaDto novaTrilhaDto);
+    void save(TrilhaDto novaTrilhaDto, UUID id);
 
     void update(UUID id, TrilhaDto novoaTrilha);
 

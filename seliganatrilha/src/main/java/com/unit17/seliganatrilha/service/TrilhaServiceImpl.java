@@ -3,7 +3,9 @@ package com.unit17.seliganatrilha.service;
 import com.unit17.seliganatrilha.dtos.TrilhaDto;
 import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
 import com.unit17.seliganatrilha.models.Trilha;
+import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.repositories.TrilhaRepository;
+import com.unit17.seliganatrilha.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,17 +18,28 @@ public class TrilhaServiceImpl implements TrilhaService {
 
     final TrilhaRepository trilhaRepository;
 
-    public TrilhaServiceImpl(TrilhaRepository trilhaRepository) {
+    final UsuarioService usuarioService;
+
+    public TrilhaServiceImpl(TrilhaRepository trilhaRepository, UsuarioService usuarioService) {
         this.trilhaRepository = trilhaRepository;
+        this.usuarioService = usuarioService;
     }
 
     public List<Trilha> findAll() {
         return trilhaRepository.findAll();
     }
 
+//    @Transactional
+//    public void save(TrilhaDto novaTrilhaDtoDto) {
+//        trilhaRepository.save(novaTrilhaDtoDto.convertToTrilha());
+//    }
+
     @Transactional
-    public void save(TrilhaDto novaTrilhaDtoDto) {
-        trilhaRepository.save(novaTrilhaDtoDto.convertToTrilha());
+    public void save(TrilhaDto novaTrilhaDto, UUID usuarioId) {
+        Usuario usuario = usuarioService.findById(usuarioId);
+        Trilha trilha = novaTrilhaDto.convertToTrilha();
+        trilha.setUsuario(usuario);
+        trilhaRepository.save(trilha);
     }
 
     @Transactional
