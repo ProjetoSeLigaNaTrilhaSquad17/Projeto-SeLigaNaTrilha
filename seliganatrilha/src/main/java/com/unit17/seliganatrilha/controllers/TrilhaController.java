@@ -36,7 +36,7 @@ public class TrilhaController {
     @PostMapping("/{id}")
     public ResponseEntity<String> save(@PathVariable (value = "id") UUID id, @RequestBody TrilhaDto trilhaNova){
         trilhaService.save(trilhaNova, id);
-        return ResponseEntity.status(HttpStatus.OK).body("Trilha cadastrada com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Trilha cadastrada com sucesso");
     }
 
     @PutMapping("/{id}")
@@ -46,7 +46,7 @@ public class TrilhaController {
         } catch (TrilhaNaoEncontradaException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Trilha atualizada com sucesso.");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     
     @DeleteMapping("/{id}")
@@ -56,6 +56,6 @@ public class TrilhaController {
         } catch (TrilhaNaoEncontradaException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Trilha deletada com sucesso.");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
