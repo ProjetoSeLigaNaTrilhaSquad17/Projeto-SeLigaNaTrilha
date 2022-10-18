@@ -2,6 +2,7 @@ package com.unit17.seliganatrilha.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,14 +14,13 @@ import java.util.*;
 @Setter
 @Entity
 @Table(name = "TB_USUARIO")
-
 @NoArgsConstructor
 public class Usuario{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Type(type="org.hibernate.type.UUIDCharType")
     private UUID id;
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false)
     private String nome;
     @Column(nullable = false, unique = true)
     private String email;
@@ -29,6 +29,7 @@ public class Usuario{
     @Column(nullable = false)
     private String senha;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Set<Trilha> trilhas = new HashSet<>();
 
@@ -38,5 +39,4 @@ public class Usuario{
         this.cpf = cpf;
         this.senha = senha;
     }
-   
 }

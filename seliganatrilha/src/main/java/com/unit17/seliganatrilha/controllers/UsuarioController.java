@@ -1,8 +1,7 @@
 package com.unit17.seliganatrilha.controllers;
 
-import com.unit17.seliganatrilha.dtos.UsuarioDto;
+import com.unit17.seliganatrilha.dtos.UsuarioPostDto;
 import com.unit17.seliganatrilha.exceptions.UsuarioNaoEncontradoException;
-import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.service.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -36,13 +35,13 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<String> save(@RequestBody UsuarioDto novoUsuario){
+    public ResponseEntity<String> save(@RequestBody UsuarioPostDto novoUsuario){
         usuarioService.save(novoUsuario);
         return ResponseEntity.status(HttpStatus.OK).body("Novo usuário cadastrado com sucesso!");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable(value = "id") UUID id, @RequestBody UsuarioDto usuarioAtualizar){
+    public ResponseEntity<String> update(@PathVariable(value = "id") UUID id, @RequestBody UsuarioPostDto usuarioAtualizar){
         try {
             usuarioService.update(id, usuarioAtualizar);
         } catch (UsuarioNaoEncontradoException e) {

@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UsuarioDto {
+public class UsuarioPostDto {
 
     @NotBlank(message = "O nome não pode ser vazio")
     private String nome;
