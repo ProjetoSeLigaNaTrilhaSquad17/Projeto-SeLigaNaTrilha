@@ -2,6 +2,7 @@ package com.unit17.seliganatrilha.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class Trilha {
     @Column(nullable = false)
     private Boolean status;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     @ToString.Exclude

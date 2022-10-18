@@ -29,11 +29,6 @@ public class TrilhaServiceImpl implements TrilhaService {
         return trilhaRepository.findAll();
     }
 
-//    @Transactional
-//    public void save(TrilhaDto novaTrilhaDtoDto) {
-//        trilhaRepository.save(novaTrilhaDtoDto.convertToTrilha());
-//    }
-
     @Transactional
     public void save(TrilhaDto novaTrilhaDto, UUID usuarioId) {
         Usuario usuario = usuarioService.findById(usuarioId);
