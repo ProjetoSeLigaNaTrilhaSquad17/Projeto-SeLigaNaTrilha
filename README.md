@@ -25,6 +25,11 @@ Em desenvolvimento
 ## Pré-requisitos:
 Para rodar essa aplicação, é necessário ter instalado o Java (Versão 17), um editor de códigos como Eclipse, IntelliJ ou Visual Studio Code(VS Code) e uma plataforma para construção e uso de APIs como Postman ou Thunder(como plug-in para o VS Code, caso esteja usando-o).
 
+## Swagger:
+````
+http://localhost:8080/swagger-ui/index.html
+````
+
 ### DTOs para as requisições POST e PUT
 #### Usuário
 
