@@ -1,6 +1,8 @@
 package com.unit17.seliganatrilha.service;
 
-import com.unit17.seliganatrilha.dtos.UsuarioPostDto;
+import com.unit17.seliganatrilha.dtos.UsuarioDto;
+import com.unit17.seliganatrilha.models.Avaliacao;
+import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 
 import java.util.List;
@@ -13,11 +15,12 @@ public interface UsuarioService {
 
     Usuario findById(UUID id);
 
-    void save(UsuarioPostDto novoUsuarioPostDto);
+    void save(UsuarioDto novoUsuarioDto);
 
-    void update(UUID id, UsuarioPostDto novoUsuario);
+    void update(UUID id, UsuarioDto novoUsuario);
 
     void delete(UUID id);
 
-    Set<String> findTrilhas(UUID id);
+    Set<Trilha> findTrilhas(UUID id);
+
 }

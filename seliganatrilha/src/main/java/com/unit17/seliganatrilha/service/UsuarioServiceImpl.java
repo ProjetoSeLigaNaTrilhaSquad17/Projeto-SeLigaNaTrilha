@@ -1,7 +1,8 @@
 package com.unit17.seliganatrilha.service;
 
-import com.unit17.seliganatrilha.dtos.UsuarioPostDto;
+import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.exceptions.UsuarioNaoEncontradoException;
+import com.unit17.seliganatrilha.models.Avaliacao;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.repositories.UsuarioRepository;
@@ -37,12 +38,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Transactional
-    public void save(UsuarioPostDto novoUsuarioPostDto) {
-        usuarioRepository.save(novoUsuarioPostDto.convertToUsuario());
+    public void save(UsuarioDto novoUsuarioDto) {
+        usuarioRepository.save(novoUsuarioDto.convertToUsuario());
     }
 
     @Transactional
-    public void update(UUID id, UsuarioPostDto novoUsuario) {
+    public void update(UUID id, UsuarioDto novoUsuario) {
         Usuario antigoUsuario = findById(id);
         antigoUsuario.setNome(novoUsuario.getNome());
         antigoUsuario.setEmail(novoUsuario.getEmail());
@@ -59,7 +60,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Set<String> findTrilhas(UUID id) {
-        return findById(id).getTrilhas().stream().map(Trilha::getNome).collect(Collectors.toSet());
+    public Set<Trilha> findTrilhas(UUID id) {
+        return findById(id).getTrilhas();
     }
+
 }

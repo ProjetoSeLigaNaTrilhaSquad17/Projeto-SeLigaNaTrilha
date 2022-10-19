@@ -3,12 +3,15 @@ package com.unit17.seliganatrilha.models;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Type;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -36,8 +39,12 @@ public class Trilha {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    @ToString.Exclude
     Usuario usuario;
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trilha")
+    private Set<Avaliacao> avaliacoes = new HashSet<>();
+
     public Trilha(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;

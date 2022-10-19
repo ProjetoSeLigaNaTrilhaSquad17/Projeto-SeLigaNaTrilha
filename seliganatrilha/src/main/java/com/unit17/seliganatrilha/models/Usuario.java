@@ -33,6 +33,7 @@ public class Usuario{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Set<Trilha> trilhas = new HashSet<>();
 
+
     public Usuario(String nome, String email, String cpf, String senha) {
         this.nome = nome;
         this.email = email;

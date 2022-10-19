@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.transaction.Transactional;
 
+import com.unit17.seliganatrilha.models.Trilha;
+import com.unit17.seliganatrilha.models.Usuario;
 import org.springframework.stereotype.Service;
 
 import com.unit17.seliganatrilha.models.Avaliacao;
@@ -17,8 +19,14 @@ import com.unit17.seliganatrilha.repositories.AvaliacaoRepository;;
 public class AvaliacaoServiceImpl implements AvaliacaoService{
 
     final AvaliacaoRepository avaliacaoRepository;
-    public AvaliacaoServiceImpl(AvaliacaoRepository avaliacaoRepository){
-            this.avaliacaoRepository = avaliacaoRepository;
+
+    final UsuarioService usuarioService;
+
+    final TrilhaService trilhaService;
+    public AvaliacaoServiceImpl(AvaliacaoRepository avaliacaoRepository, UsuarioService usuarioService, TrilhaService trilhaService){
+        this.avaliacaoRepository = avaliacaoRepository;
+        this.usuarioService = usuarioService;
+        this.trilhaService = trilhaService;
     }
 
     @Override
@@ -27,8 +35,11 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
     }
 
     @Transactional
-    public void save(AvaliacaoDto novaAvaliacaoDto){
-        avaliacaoRepository.save(novaAvaliacaoDto.convertToAvaliacao());
+    public void save(AvaliacaoDto novaAvaliacaoDto, UUID trilhaId){
+        Trilha trilha = trilhaService.findById(trilhaId);
+        Avaliacao avaliacao = novaAvaliacaoDto.convertToAvaliacao();
+        avaliacao.setTrilha(trilha);
+        avaliacaoRepository.save(avaliacao);
     }
 
     @Transactional

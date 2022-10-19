@@ -1,9 +1,11 @@
 package com.unit17.seliganatrilha.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
@@ -23,17 +25,17 @@ public class Avaliacao{
     @Type(type="org.hibernate.type.UUIDCharType")
     private UUID id;
 
-    @Column(name = "comentario", nullable = true)
+    @Column(name = "comentario")
     private String comentario;
 
     @Column(name = "nota", nullable = false)
     private int nota;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idTrilha", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "trilha_id")
     private Trilha trilha;
+
 
     public Avaliacao(String comentario, int nota, Trilha trilha) {
         this.comentario = comentario;
