@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface AvaliacaoService {
     List<Avaliacao> findAll();
 
-    void save(AvaliacaoDto novaAvaliacaoDto);
+    void save(AvaliacaoDto novaAvaliacaoDto, UUID id);
 
     void update(UUID id, AvaliacaoDto avaliacaoAtualiza);
 

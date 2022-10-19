@@ -2,6 +2,7 @@ package com.unit17.seliganatrilha.service;
 
 import com.unit17.seliganatrilha.dtos.TrilhaDto;
 import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
+import com.unit17.seliganatrilha.models.Avaliacao;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.repositories.TrilhaRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -63,5 +65,10 @@ public class TrilhaServiceImpl implements TrilhaService {
             throw new TrilhaNaoEncontradaException();
         }
         return trilha.get();
+    }
+
+    @Override
+    public Set<Avaliacao> findAvaliacoes(UUID id) {
+        return findById(id).getAvaliacoes();
     }
 }

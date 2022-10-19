@@ -2,12 +2,15 @@ package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.dtos.TrilhaDto;
 import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
+import com.unit17.seliganatrilha.models.Avaliacao;
 import com.unit17.seliganatrilha.models.Trilha;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.unit17.seliganatrilha.service.TrilhaService;
+import com.unit17.seliganatrilha.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class TrilhaController {
 
     final TrilhaService trilhaService;
+
 
     public TrilhaController(TrilhaService trilhaService) {
         this.trilhaService = trilhaService;
@@ -32,10 +36,15 @@ public class TrilhaController {
     public ResponseEntity<Trilha> findById(@PathVariable (value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(trilhaService.findById(id));
     }
+
+    @GetMapping("/{id}/avaliacoes")
+    public Set<Avaliacao> findAvaliacoes(@PathVariable(value = "id") UUID id){
+        return trilhaService.findAvaliacoes(id);
+    }
     
     @PostMapping("/{id}")
-    public ResponseEntity<String> save(@PathVariable (value = "id") UUID id, @RequestBody TrilhaDto trilhaNova){
-        trilhaService.save(trilhaNova, id);
+    public ResponseEntity<String> save(@PathVariable (value = "id") UUID usuarioId, @RequestBody TrilhaDto trilhaNova){
+        trilhaService.save(trilhaNova, usuarioId);
         return ResponseEntity.status(HttpStatus.CREATED).body("Trilha cadastrada com sucesso");
     }
 

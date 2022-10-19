@@ -14,14 +14,15 @@ Em desenvolvimento
 - [✅] Listar Trilhas
 - [✅] Buscar Trilha por Id
 - [❌] Listar Trilhas por Tema
-- [❌] Listar Trilhas do mesmo criador
-- [❌] Adicionar comentário
+- [✅] Listar Trilhas do mesmo criador
+- [✅] Adicionar avaliação
+- [✅] Listar avaliações de uma trilha
 
 ✅ - Implementada  
 ❌ - A fazer  
 🔄 - Em andamento
 
-<h2>Pré-requisitos:</h2>
+## Pré-requisitos:
 Para rodar essa aplicação, é necessário ter instalado o Java (Versão 17), um editor de códigos como Eclipse, IntelliJ ou Visual Studio Code(VS Code) e uma plataforma para construção e uso de APIs como Postman ou Thunder(como plug-in para o VS Code, caso esteja usando-o).
 
 ### DTOs para as requisições POST e PUT
@@ -41,5 +42,13 @@ Para rodar essa aplicação, é necessário ter instalado o Java (Versão 17), u
 {
     "nome" : "Nome Exemplo",
     "descricao" : "Descrição do conteúdo presente na trilha"
+}
+````
+
+#### Avaliação
+````
+{
+    "comentario" : "Comentário Exemplo",
+    "nota" : 0-5
 }
 ````

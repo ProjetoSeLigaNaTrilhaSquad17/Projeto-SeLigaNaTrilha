@@ -39,9 +39,9 @@ public class AvaliacaoController {
         return avaliacaoService.findAll();
     }
 
-    @PostMapping
-    public ResponseEntity<String> save(@RequestBody AvaliacaoDto novaAvaliacao){
-        avaliacaoService.save(novaAvaliacao);
+    @PostMapping("/{id}")
+    public ResponseEntity<String> save(@PathVariable(value = "id") UUID id, @RequestBody AvaliacaoDto novaAvaliacao){
+        avaliacaoService.save(novaAvaliacao, id);
         return ResponseEntity.status(HttpStatus.OK).body("Sua avaliaçào foi realizada com sucesso");
     }
 
