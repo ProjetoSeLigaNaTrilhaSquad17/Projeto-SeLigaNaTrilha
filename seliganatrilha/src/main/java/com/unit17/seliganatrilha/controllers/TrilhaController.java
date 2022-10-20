@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.unit17.seliganatrilha.service.TrilhaService;
-import com.unit17.seliganatrilha.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +44,7 @@ public class TrilhaController {
     @PostMapping("/{id}")
     public ResponseEntity<String> save(@PathVariable (value = "id") UUID usuarioId, @RequestBody TrilhaDto trilhaNova){
         trilhaService.save(trilhaNova, usuarioId);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Trilha cadastrada com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Trilha cadastrada com sucesso"); //HTTP return 201 - CREATED
     }
 
     @PutMapping("/{id}")
@@ -53,9 +52,9 @@ public class TrilhaController {
         try {
             trilhaService.update(id, trilhaAtualizar);
         } catch (TrilhaNaoEncontradaException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); //HTTP returns 404 - NOT_FOUND
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build(); //HTTP returns 202 - Accepted
     }
     
     @DeleteMapping("/{id}")
@@ -63,8 +62,8 @@ public class TrilhaController {
         try {
             trilhaService.delete(id);
         } catch (TrilhaNaoEncontradaException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); //HTTP returns 404 - NOT_FOUND
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); //HTTP returns 204 - NO_CONTENT
     }
 }

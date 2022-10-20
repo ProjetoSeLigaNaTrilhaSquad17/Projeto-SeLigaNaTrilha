@@ -6,7 +6,6 @@ import com.unit17.seliganatrilha.models.Avaliacao;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.repositories.TrilhaRepository;
-import com.unit17.seliganatrilha.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

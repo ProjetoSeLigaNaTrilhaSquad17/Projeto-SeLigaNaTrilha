@@ -1,6 +1,5 @@
 package com.unit17.seliganatrilha.controllers;
 
-import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unit17.seliganatrilha.dtos.AvaliacaoDto;
@@ -42,7 +41,7 @@ public class AvaliacaoController {
     @PostMapping("/{id}")
     public ResponseEntity<String> save(@PathVariable(value = "id") UUID id, @RequestBody AvaliacaoDto novaAvaliacao){
         avaliacaoService.save(novaAvaliacao, id);
-        return ResponseEntity.status(HttpStatus.OK).body("Sua avaliaçào foi realizada com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Sua avaliação foi realizada com sucesso"); //HTTP return 201 - CREATED
     }
 
     @PutMapping("/{id}")
@@ -50,9 +49,9 @@ public class AvaliacaoController {
         try {
             avaliacaoService.update(id, avaliacaoAtualizar);
         } catch (AvaliacaoNaoEncontradaException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); //HTTP returns 404 - NOT_FOUND
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build(); //HTTP returns 202 - Accepted
     }
 
     @DeleteMapping("/{id}")
@@ -60,8 +59,8 @@ public class AvaliacaoController {
         try {
             avaliacaoService.delete(id);
         } catch (AvaliacaoNaoEncontradaException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); //HTTP returns 404 - NOT_FOUND
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); //HTTP returns 204 - NO_CONTENT
     }
 }

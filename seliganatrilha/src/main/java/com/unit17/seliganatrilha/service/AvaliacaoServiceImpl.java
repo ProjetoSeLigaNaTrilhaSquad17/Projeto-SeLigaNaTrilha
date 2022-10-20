@@ -7,7 +7,6 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import com.unit17.seliganatrilha.models.Trilha;
-import com.unit17.seliganatrilha.models.Usuario;
 import org.springframework.stereotype.Service;
 
 import com.unit17.seliganatrilha.models.Avaliacao;

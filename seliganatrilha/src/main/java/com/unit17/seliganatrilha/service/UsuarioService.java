@@ -1,7 +1,6 @@
 package com.unit17.seliganatrilha.service;
 
 import com.unit17.seliganatrilha.dtos.UsuarioDto;
-import com.unit17.seliganatrilha.models.Avaliacao;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 

@@ -2,7 +2,6 @@ package com.unit17.seliganatrilha.service;
 
 import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.exceptions.UsuarioNaoEncontradoException;
-import com.unit17.seliganatrilha.models.Avaliacao;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.repositories.UsuarioRepository;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {

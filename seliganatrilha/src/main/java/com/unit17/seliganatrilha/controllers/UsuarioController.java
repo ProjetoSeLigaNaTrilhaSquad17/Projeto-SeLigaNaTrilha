@@ -2,7 +2,6 @@ package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.exceptions.UsuarioNaoEncontradoException;
-import com.unit17.seliganatrilha.models.Avaliacao;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
 import com.unit17.seliganatrilha.service.UsuarioService;
@@ -39,7 +38,7 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<String> save(@RequestBody UsuarioDto novoUsuario){
         usuarioService.save(novoUsuario);
-        return ResponseEntity.status(HttpStatus.OK).body("Novo usuário cadastrado com sucesso!");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Novo usuário cadastrado com sucesso!"); //HTTP return 201 - CREATED
     }
 
     @PutMapping("/{id}")
@@ -47,9 +46,9 @@ public class UsuarioController {
         try {
             usuarioService.update(id, usuarioAtualizar);
         } catch (UsuarioNaoEncontradoException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); //HTTP returns 404 - NOT_FOUND
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Dados de usuário atualizados com sucesso!");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Dados de usuário atualizados com sucesso!"); //HTTP returns 202 - Accepted
     }
 
     @DeleteMapping("/{id}")
@@ -57,9 +56,9 @@ public class UsuarioController {
         try {
             usuarioService.delete(id);
         } catch (UsuarioNaoEncontradoException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); //HTTP returns 404 - NOT_FOUND
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Usuário deletado com sucesso");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Usuário deletado com sucesso"); //HTTP returns 204 - NO_CONTENT
     }
 
 }
