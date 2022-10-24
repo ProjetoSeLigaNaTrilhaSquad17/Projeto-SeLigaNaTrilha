@@ -4,14 +4,13 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.unit17.seliganatrilha.dtos.AulaDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "TB_TRILHA")
@@ -44,9 +43,14 @@ public class Trilha {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trilha")
     private Set<Avaliacao> avaliacoes = new HashSet<>();
 
-    public Trilha(String nome, String descricao) {
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trilha")
+    private List<Aula> aulas = new ArrayList<>();
+
+    public Trilha(String nome, String descricao, List<AulaDto> aulas) {
         this.nome = nome;
         this.descricao = descricao;
+        this.aulas.addAll(aulas.stream().map(AulaDto::convertToAula).toList());
         this.status = false;
     }
 }
