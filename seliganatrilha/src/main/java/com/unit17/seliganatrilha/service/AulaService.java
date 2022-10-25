@@ -11,7 +11,7 @@ public interface AulaService {
 
     Aula findById(UUID id);
 
-    void save(Trilha trilha, AulaDto novaAula);
+    void save(UUID trilhaId, AulaDto novaAula);
 
     void update(UUID id, AulaDto novaAula);
 

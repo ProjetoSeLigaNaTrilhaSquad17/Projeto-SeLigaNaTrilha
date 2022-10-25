@@ -14,11 +14,11 @@ import java.util.UUID;
 public class AulaServiceImpl implements AulaService{
 
     final AulaRepository aulaRepository;
-    final LinkService linkService;
+    final TrilhaService trilhaService;
 
-    public AulaServiceImpl(AulaRepository aulaRepository, LinkService linkService) {
+    public AulaServiceImpl(AulaRepository aulaRepository, TrilhaService trilhaService) {
         this.aulaRepository = aulaRepository;
-        this.linkService = linkService;
+        this.trilhaService = trilhaService;
     }
 
 
@@ -32,20 +32,29 @@ public class AulaServiceImpl implements AulaService{
     }
 
     @Transactional
-    public void save(Trilha trilha, AulaDto novaAula) {
+    public void save(UUID trilhaId, AulaDto novaAula) {
+        Trilha trilha = trilhaService.findById(trilhaId);
         Aula aula = novaAula.convertToAula();
         aula.setTrilha(trilha);
         aulaRepository.save(aula);
-        novaAula.getLinks().forEach(link -> linkService.save(aula, link));
     }
 
     @Transactional
     public void update(UUID id, AulaDto novaAula) {
-
+        Optional<Aula> aula = aulaRepository.findById(id);
+        if(aula.isEmpty()) {
+            throw  new RuntimeException();
+        }
+        Aula antigaAula = aula.get();
+        antigaAula.setTexto(novaAula.getTexto());
+        antigaAula.setTitulo(novaAula.getTitulo());
     }
 
     @Transactional
     public void delete(UUID id) {
-
+        if(!aulaRepository.existsById(id)) {
+            throw  new RuntimeException();
+        }
+        aulaRepository.deleteById(id);
     }
 }

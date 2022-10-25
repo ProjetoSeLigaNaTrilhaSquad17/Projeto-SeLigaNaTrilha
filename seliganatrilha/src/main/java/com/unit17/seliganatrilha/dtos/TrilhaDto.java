@@ -18,9 +18,6 @@ public class TrilhaDto {
     @NotBlank(message = "Digite uma breve descrição sobre a trilha.")
     private String descricao;
 
-    @NotBlank(message = "A trilha precisa conter aulas")
-    private List<AulaDto> aulas;
-
     @NotBlank(message = "A trilhar precisar conter temas")
     private Set<String> temas;
 

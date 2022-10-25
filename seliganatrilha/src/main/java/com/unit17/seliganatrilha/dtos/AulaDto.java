@@ -14,8 +14,6 @@ public class AulaDto {
 
     private String texto;
 
-    private List<String> links;
-
     public Aula convertToAula(){
         return new Aula(this.titulo, this.texto);
     }

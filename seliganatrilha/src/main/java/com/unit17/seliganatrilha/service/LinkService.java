@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface LinkService {
 
-    void save(Aula aula, String novoLink);
+    void save(UUID aulaId, String novoLink);
 
     void update(UUID id, String novoLink);
 
