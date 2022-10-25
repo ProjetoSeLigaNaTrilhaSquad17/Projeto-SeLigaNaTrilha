@@ -21,7 +21,6 @@ public class TrilhaController {
 
     final TrilhaService trilhaService;
 
-
     public TrilhaController(TrilhaService trilhaService) {
         this.trilhaService = trilhaService;
     }

@@ -1,6 +1,6 @@
 package com.unit17.seliganatrilha.repositories;
 
-import com.unit17.seliganatrilha.models.Trilha;
+import com.unit17.seliganatrilha.models.Tema;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface TrilhaRepository extends JpaRepository<Trilha, UUID>{
+public interface TemaRepository extends JpaRepository<Tema, UUID> {
 
-    List<Trilha> findTrilhasByTemasId(UUID temaId);
+    List<Tema> findTemasByTrilhasId(UUID trilhaId);
+
 }

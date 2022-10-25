@@ -3,6 +3,7 @@ package com.unit17.seliganatrilha.models;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.unit17.seliganatrilha.dtos.AulaDto;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "TB_TRILHA")
@@ -23,7 +25,7 @@ public class Trilha {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type="org.hibernate.type.UUIDCharType")
     @Column(nullable = false, unique = true)
-    private UUID idTrilha;
+    private UUID id;
 
     @Column(nullable = false, unique = true)
     private String nome;
@@ -47,10 +49,18 @@ public class Trilha {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trilha")
     private List<Aula> aulas = new ArrayList<>();
 
-    public Trilha(String nome, String descricao, List<AulaDto> aulas) {
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "trilhas")
+    @JsonIgnore
+    private Set<Tema> temas = new HashSet<>();
+
+    public Trilha(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
-        this.aulas.addAll(aulas.stream().map(AulaDto::convertToAula).toList());
         this.status = false;
     }
 }

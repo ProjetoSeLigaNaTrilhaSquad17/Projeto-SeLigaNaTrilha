@@ -2,6 +2,7 @@ package com.unit17.seliganatrilha.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
@@ -9,9 +10,10 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table
+@Table(name = "TB_LINK")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Link {
 
     @Id

@@ -21,4 +21,6 @@ public interface TrilhaService {
     Trilha findById(UUID id);
 
     Set<Avaliacao> findAvaliacoes(UUID id);
+
+    Boolean existsById(UUID id);
 }
