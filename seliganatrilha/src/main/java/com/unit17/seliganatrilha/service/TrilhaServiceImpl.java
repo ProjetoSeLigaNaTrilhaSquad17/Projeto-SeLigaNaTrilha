@@ -36,8 +36,8 @@ public class TrilhaServiceImpl implements TrilhaService {
         Usuario usuario = usuarioService.findById(usuarioId);
         Trilha trilha = novaTrilhaDto.convertToTrilha();
         trilha.setUsuario(usuario);
+        novaTrilhaDto.getTemasId().forEach(temaId -> trilha.getTemas().add(temaService.findById(temaId)));
         trilhaRepository.save(trilha);
-        //novaTrilhaDto.getTemas().forEach(tema -> temaService.save(trilha, tema));
     }
 
     @Transactional

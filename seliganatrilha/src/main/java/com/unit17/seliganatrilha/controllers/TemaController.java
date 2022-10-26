@@ -2,12 +2,14 @@ package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.exceptions.TemaNaoEncontradoException;
 import com.unit17.seliganatrilha.models.Tema;
+import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.service.TemaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -24,6 +26,11 @@ public class TemaController {
     @GetMapping
     public List<Tema> findAll() {
         return temaService.findAll();
+    }
+
+    @GetMapping("/{id}/trilhas")
+    public Set<Trilha> findById(@PathVariable(value = "id") UUID id) {
+        return temaService.findTrilhas(id);
     }
 
     @PostMapping

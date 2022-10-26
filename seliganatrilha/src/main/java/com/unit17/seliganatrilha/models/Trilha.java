@@ -49,13 +49,12 @@ public class Trilha {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trilha")
     private List<Aula> aulas = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "trilhas")
-    @JsonIgnore
+    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "tb_tema_trilha",
+            joinColumns = { @JoinColumn(name = "trilha_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tema_id")
+            })
     private Set<Tema> temas = new HashSet<>();
 
     public Trilha(String nome, String descricao) {

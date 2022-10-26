@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,8 +19,7 @@ public class TrilhaDto {
     private String descricao;
 
     @NotBlank(message = "A trilhar precisar conter temas")
-    private Set<String> temas;
-
+    private List<UUID> temasId;
 
     public Trilha convertToTrilha(){
         return new Trilha(this.nome, this.descricao);

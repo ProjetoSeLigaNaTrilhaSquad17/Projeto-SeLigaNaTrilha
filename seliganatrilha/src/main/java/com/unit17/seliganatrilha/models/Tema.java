@@ -1,5 +1,7 @@
 package com.unit17.seliganatrilha.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,11 +29,8 @@ public class Tema {
     @NotBlank
     private String nome;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "tb_tema_trilha",
-            joinColumns = { @JoinColumn(name = "tema_id") },
-            inverseJoinColumns = { @JoinColumn(name = "trilha_id")
-    })
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "temas")
     private Set<Trilha> trilhas = new HashSet<>();
 
     public Tema(String nome) {
