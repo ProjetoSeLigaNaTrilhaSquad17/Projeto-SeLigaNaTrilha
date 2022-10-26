@@ -3,15 +3,16 @@ package com.unit17.seliganatrilha.models;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.unit17.seliganatrilha.dtos.AulaDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "TB_TRILHA")
@@ -24,7 +25,7 @@ public class Trilha {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type="org.hibernate.type.UUIDCharType")
     @Column(nullable = false, unique = true)
-    private UUID idTrilha;
+    private UUID id;
 
     @Column(nullable = false, unique = true)
     private String nome;
@@ -43,6 +44,18 @@ public class Trilha {
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trilha")
     private Set<Avaliacao> avaliacoes = new HashSet<>();
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trilha")
+    private List<Aula> aulas = new ArrayList<>();
+
+    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "tb_tema_trilha",
+            joinColumns = { @JoinColumn(name = "trilha_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tema_id")
+            })
+    private Set<Tema> temas = new HashSet<>();
 
     public Trilha(String nome, String descricao) {
         this.nome = nome;

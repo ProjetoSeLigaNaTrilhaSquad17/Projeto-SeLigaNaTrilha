@@ -8,12 +8,14 @@ Em desenvolvimento
 ## Features:
 
 - [✅] Cadastro de usuários
-- [🔄] Cadastro de Trilhas
-- [❌] Cadastro de capítulos das trilhas
+- [✅] Atualizar usuário
+- [✅] Cadastro de Trilhas
+- [🔄] Atualizar Trilha
+- [✅] Cadastro de capítulos das trilhas
 - [❌] Validação de trilhas pelo usuário curador
 - [✅] Listar Trilhas
 - [✅] Buscar Trilha por Id
-- [❌] Listar Trilhas por Tema
+- [✅] Listar Trilhas por Tema
 - [✅] Listar Trilhas do mesmo criador
 - [✅] Adicionar avaliação
 - [✅] Listar avaliações de uma trilha

@@ -18,12 +18,13 @@ import java.util.UUID;
 public class TrilhaServiceImpl implements TrilhaService {
 
     final TrilhaRepository trilhaRepository;
-
     final UsuarioService usuarioService;
+    final TemaService temaService;
 
-    public TrilhaServiceImpl(TrilhaRepository trilhaRepository, UsuarioService usuarioService) {
+    public TrilhaServiceImpl(TrilhaRepository trilhaRepository, UsuarioService usuarioService, TemaService temaService) {
         this.trilhaRepository = trilhaRepository;
         this.usuarioService = usuarioService;
+        this.temaService = temaService;
     }
 
     public List<Trilha> findAll() {
@@ -35,6 +36,7 @@ public class TrilhaServiceImpl implements TrilhaService {
         Usuario usuario = usuarioService.findById(usuarioId);
         Trilha trilha = novaTrilhaDto.convertToTrilha();
         trilha.setUsuario(usuario);
+        novaTrilhaDto.getTemasId().forEach(temaId -> trilha.getTemas().add(temaService.findById(temaId)));
         trilhaRepository.save(trilha);
     }
 
@@ -69,5 +71,10 @@ public class TrilhaServiceImpl implements TrilhaService {
     @Override
     public Set<Avaliacao> findAvaliacoes(UUID id) {
         return findById(id).getAvaliacoes();
+    }
+
+    @Override
+    public Boolean existsById(UUID id) {
+        return trilhaRepository.existsById(id);
     }
 }

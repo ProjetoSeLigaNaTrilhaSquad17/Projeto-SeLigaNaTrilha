@@ -6,6 +6,9 @@ import com.unit17.seliganatrilha.models.Trilha;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.UUID;
+
 @Getter
 @Setter
 public class TrilhaDto {
@@ -15,6 +18,8 @@ public class TrilhaDto {
     @NotBlank(message = "Digite uma breve descrição sobre a trilha.")
     private String descricao;
 
+    @NotBlank(message = "A trilhar precisar conter temas")
+    private List<UUID> temasId;
 
     public Trilha convertToTrilha(){
         return new Trilha(this.nome, this.descricao);

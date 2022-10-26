@@ -11,8 +11,8 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @Setter
 public class AvaliacaoDto {
-    
-    String comentario;
+
+    private String comentario;
 
     @NotBlank
     @Range(min = 0, max = 5, message = "A nota tem que ser entre 1 e 5.")
