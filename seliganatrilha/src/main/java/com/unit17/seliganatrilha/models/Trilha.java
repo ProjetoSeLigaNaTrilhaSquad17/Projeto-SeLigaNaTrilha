@@ -3,16 +3,13 @@ package com.unit17.seliganatrilha.models;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.unit17.seliganatrilha.dtos.AulaDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "TB_TRILHA")
