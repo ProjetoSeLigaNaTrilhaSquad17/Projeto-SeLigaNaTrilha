@@ -1,6 +1,5 @@
 package com.unit17.seliganatrilha.controllers;
 
-import com.unit17.seliganatrilha.dtos.AulaDto;
 import com.unit17.seliganatrilha.service.LinkService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

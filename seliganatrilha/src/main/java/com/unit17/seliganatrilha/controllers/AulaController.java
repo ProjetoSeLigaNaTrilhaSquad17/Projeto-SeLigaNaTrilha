@@ -1,9 +1,7 @@
 package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.dtos.AulaDto;
-import com.unit17.seliganatrilha.dtos.TrilhaDto;
 import com.unit17.seliganatrilha.exceptions.AulaNaoEncontradaException;
-import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
 import com.unit17.seliganatrilha.service.AulaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
