@@ -2,6 +2,7 @@ package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.dtos.AulaDto;
 import com.unit17.seliganatrilha.dtos.TrilhaDto;
+import com.unit17.seliganatrilha.exceptions.AulaNaoEncontradaException;
 import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
 import com.unit17.seliganatrilha.service.AulaService;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,15 @@ public class AulaController {
 
     public AulaController(AulaService aulaService) {
         this.aulaService = aulaService;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable (value = "id")UUID id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(aulaService.findById(id));
+        } catch (AulaNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping("/{trilhaId}")

@@ -1,6 +1,7 @@
 package com.unit17.seliganatrilha.service;
 
 import com.unit17.seliganatrilha.dtos.AulaDto;
+import com.unit17.seliganatrilha.exceptions.AulaNaoEncontradaException;
 import com.unit17.seliganatrilha.models.Aula;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.repositories.AulaRepository;
@@ -15,10 +16,12 @@ public class AulaServiceImpl implements AulaService{
 
     final AulaRepository aulaRepository;
     final TrilhaService trilhaService;
+    final TemaService temaService;
 
-    public AulaServiceImpl(AulaRepository aulaRepository, TrilhaService trilhaService) {
+    public AulaServiceImpl(AulaRepository aulaRepository, TrilhaService trilhaService, TemaService temaService) {
         this.aulaRepository = aulaRepository;
         this.trilhaService = trilhaService;
+        this.temaService = temaService;
     }
 
 
@@ -26,7 +29,7 @@ public class AulaServiceImpl implements AulaService{
     public Aula findById(UUID id) {
         Optional<Aula> aula = aulaRepository.findById(id);
         if(aula.isEmpty()) {
-            throw new RuntimeException();
+            throw new AulaNaoEncontradaException();
         }
         return aula.get();
     }
@@ -36,6 +39,7 @@ public class AulaServiceImpl implements AulaService{
         Trilha trilha = trilhaService.findById(trilhaId);
         Aula aula = novaAula.convertToAula();
         aula.setTrilha(trilha);
+        novaAula.getTemasId().forEach(temaId -> aula.getTemas().add(temaService.findById(temaId)));
         aulaRepository.save(aula);
     }
 
@@ -48,6 +52,8 @@ public class AulaServiceImpl implements AulaService{
         Aula antigaAula = aula.get();
         antigaAula.setTexto(novaAula.getTexto());
         antigaAula.setTitulo(novaAula.getTitulo());
+        antigaAula.getTemas().clear();
+        novaAula.getTemasId().forEach(temaId -> antigaAula.getTemas().add(temaService.findById(temaId)));
     }
 
     @Transactional

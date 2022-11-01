@@ -1,16 +1,16 @@
 package com.unit17.seliganatrilha.service;
 
 import com.unit17.seliganatrilha.exceptions.TemaNaoEncontradoException;
-import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
+import com.unit17.seliganatrilha.models.Aula;
 import com.unit17.seliganatrilha.models.Tema;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.repositories.TemaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -47,8 +47,16 @@ public class TemaServiceImpl implements TemaService {
     }
 
     @Override
-    public Set<Trilha> findTrilhas(UUID id) {
-        return findById(id).getTrilhas();
+    public List<Aula> findAulas(UUID id) {
+        return findById(id).getAulas();
+    }
+
+    @Override
+    public List<Trilha> findTrilhas(UUID id) {
+        Tema tema = findById(id);
+        List<Trilha> trilhas = new ArrayList<>();
+        tema.getAulas().forEach(aula -> trilhas.add(aula.getTrilha()));
+        return trilhas;
     }
 
     @Transactional

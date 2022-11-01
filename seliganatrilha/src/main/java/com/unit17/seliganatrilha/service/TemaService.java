@@ -1,10 +1,10 @@
 package com.unit17.seliganatrilha.service;
 
+import com.unit17.seliganatrilha.models.Aula;
 import com.unit17.seliganatrilha.models.Tema;
 import com.unit17.seliganatrilha.models.Trilha;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public interface TemaService {
@@ -15,7 +15,9 @@ public interface TemaService {
 
     List<Tema> findByNome(String nome);
 
-    Set<Trilha> findTrilhas(UUID id);
+    List<Aula> findAulas(UUID id);
+
+    List<Trilha> findTrilhas(UUID id);
 
     void save(String novoTema);
 

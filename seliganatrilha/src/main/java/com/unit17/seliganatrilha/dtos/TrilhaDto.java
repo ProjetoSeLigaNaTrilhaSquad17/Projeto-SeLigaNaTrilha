@@ -18,9 +18,6 @@ public class TrilhaDto {
     @NotBlank(message = "Digite uma breve descrição sobre a trilha.")
     private String descricao;
 
-    @NotBlank(message = "A trilhar precisar conter temas")
-    private List<UUID> temasId;
-
     public Trilha convertToTrilha(){
         return new Trilha(this.nome, this.descricao);
     }
