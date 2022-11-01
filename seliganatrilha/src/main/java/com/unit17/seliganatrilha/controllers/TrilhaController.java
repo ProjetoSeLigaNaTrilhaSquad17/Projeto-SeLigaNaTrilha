@@ -30,7 +30,7 @@ public class TrilhaController {
         return trilhaService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Trilha> findById(@PathVariable (value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(trilhaService.findById(id));
     }
@@ -66,25 +66,12 @@ public class TrilhaController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); //HTTP returns 204 - NO_CONTENT
     }
 
-//    @PostMapping("/tutorials/{tutorialId}/tags")
-//    public ResponseEntity<Tag> addTag(@PathVariable(value = "tutorialId") Long tutorialId, @RequestBody Tag tagRequest) {
-//        Tag tag = tutorialRepository.findById(tutorialId).map(tutorial -> {
-//            long tagId = tagRequest.getId();
-//
-//            // tag is existed
-//            if (tagId != 0L) {
-//                Tag _tag = tagRepository.findById(tagId)
-//                        .orElseThrow(() -> new ResourceNotFoundException("Not found Tag with id = " + tagId));
-//                tutorial.addTag(_tag);
-//                tutorialRepository.save(tutorial);
-//                return _tag;
-//            }
-//
-//            // add and create new Tag
-//            tutorial.addTag(tagRequest);
-//            return tagRepository.save(tagRequest);
-//        }).orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + tutorialId));
-//
-//        return new ResponseEntity<>(tag, HttpStatus.CREATED);
-//    }
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<Object> findByName(@PathVariable(value = "nome") String nome){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(trilhaService.findByName(nome));
+        } catch (TrilhaNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }

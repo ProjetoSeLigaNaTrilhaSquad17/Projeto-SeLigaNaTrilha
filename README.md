@@ -10,8 +10,9 @@ Em desenvolvimento
 - [✅] Cadastro de usuários
 - [✅] Atualizar usuário
 - [✅] Cadastro de Trilhas
-- [🔄] Atualizar Trilha
-- [✅] Cadastro de capítulos das trilhas
+- [✅] Atualizar Trilha
+- [✅] Cadastro de aulas das trilhas
+- [✅] Atualizar aulas
 - [❌] Validação de trilhas pelo usuário curador
 - [✅] Listar Trilhas
 - [✅] Buscar Trilha por Id

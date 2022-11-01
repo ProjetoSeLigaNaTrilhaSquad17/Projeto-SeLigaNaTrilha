@@ -9,9 +9,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Table(name = "TB_AULA")
 @Getter
@@ -41,6 +39,14 @@ public class Aula {
     @ManyToOne
     @JoinColumn(name = "trilha_id")
     private Trilha trilha;
+
+    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "tb_tema_aula",
+            joinColumns = { @JoinColumn(name = "aula_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tema_id")
+            })
+    private Set<Tema> temas = new HashSet<>();
 
     public Aula(String titulo, String texto) {
         this.titulo = titulo;
