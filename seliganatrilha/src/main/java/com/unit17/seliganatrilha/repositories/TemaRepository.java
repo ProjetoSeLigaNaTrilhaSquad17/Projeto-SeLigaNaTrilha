@@ -12,4 +12,6 @@ public interface TemaRepository extends JpaRepository<Tema, UUID> {
 
     List<Tema> findTemasByTrilhasId(UUID trilhaId);
 
+    List<Tema> findByNomeContaining(String nome);
+
 }

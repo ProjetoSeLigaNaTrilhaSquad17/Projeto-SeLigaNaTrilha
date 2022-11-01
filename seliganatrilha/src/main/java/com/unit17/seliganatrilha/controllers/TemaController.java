@@ -62,4 +62,13 @@ public class TemaController {
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @GetMapping("/{nome}")
+    public ResponseEntity<Object> findByNome(@PathVariable(value = "nome") String nome) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(temaService.findByNome(nome));
+        } catch (TemaNaoEncontradoException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }

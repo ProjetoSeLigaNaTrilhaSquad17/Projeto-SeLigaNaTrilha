@@ -32,9 +32,18 @@ public class TemaServiceImpl implements TemaService {
     public Tema findById(UUID id) {
         Optional<Tema> tema = temaRepository.findById(id);
         if(tema.isEmpty()) {
-            throw new RuntimeException();
+            throw new TemaNaoEncontradoException();
         }
         return tema.get();
+    }
+
+    @Override
+    public List<Tema> findByNome(String nome) {
+        List<Tema> temas = temaRepository.findByNomeContaining(nome);
+        if(temas.isEmpty()) {
+            throw new TemaNaoEncontradoException();
+        }
+        return temas;
     }
 
     @Override

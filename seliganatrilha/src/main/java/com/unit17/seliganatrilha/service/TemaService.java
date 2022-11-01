@@ -13,6 +13,8 @@ public interface TemaService {
 
     Tema findById(UUID id);
 
+    List<Tema> findByNome(String nome);
+
     Set<Trilha> findTrilhas(UUID id);
 
     void save(String novoTema);

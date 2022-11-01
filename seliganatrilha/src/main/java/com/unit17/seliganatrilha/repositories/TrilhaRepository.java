@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface TrilhaRepository extends JpaRepository<Trilha, UUID>{
 
     List<Trilha> findTrilhasByTemasId(UUID temaId);
+
+    List<Trilha> findByNomeContaining(String name);
 }

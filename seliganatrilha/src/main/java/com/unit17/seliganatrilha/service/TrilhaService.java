@@ -20,7 +20,7 @@ public interface TrilhaService {
 
     Trilha findById(UUID id);
 
-    Set<Avaliacao> findAvaliacoes(UUID id);
+    List<Trilha> findByName(String name);
 
-    Boolean existsById(UUID id);
+    Set<Avaliacao> findAvaliacoes(UUID id);
 }

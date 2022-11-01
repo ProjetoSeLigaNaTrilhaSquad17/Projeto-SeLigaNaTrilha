@@ -69,12 +69,17 @@ public class TrilhaServiceImpl implements TrilhaService {
     }
 
     @Override
+    public List<Trilha> findByName(String name) {
+        List<Trilha> trilhas = trilhaRepository.findByNomeContaining(name);
+        if(trilhas.isEmpty()) {
+            throw new TrilhaNaoEncontradaException();
+        }
+        return trilhas;
+    }
+
+    @Override
     public Set<Avaliacao> findAvaliacoes(UUID id) {
         return findById(id).getAvaliacoes();
     }
 
-    @Override
-    public Boolean existsById(UUID id) {
-        return trilhaRepository.existsById(id);
-    }
 }
