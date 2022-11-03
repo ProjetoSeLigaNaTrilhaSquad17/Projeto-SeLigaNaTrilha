@@ -26,6 +26,7 @@ public class Usuario{
     private String email;
     @Column(nullable = false, unique = true)
     private String cpf;
+
     @Column(nullable = false)
     private String senha;
 
@@ -33,6 +34,10 @@ public class Usuario{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Set<Trilha> trilhas = new HashSet<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "TB_USUARIO_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role_id")
+    private List<String> roles = new ArrayList<>();
 
     public Usuario(String nome, String email, String cpf, String senha) {
         this.nome = nome;

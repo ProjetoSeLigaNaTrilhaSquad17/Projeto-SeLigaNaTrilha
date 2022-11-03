@@ -4,7 +4,10 @@ import com.unit17.seliganatrilha.dtos.UsuarioDto;
 import com.unit17.seliganatrilha.exceptions.UsuarioNaoEncontradoException;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.models.Usuario;
+
 import com.unit17.seliganatrilha.repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,6 +20,9 @@ import java.util.UUID;
 public class UsuarioServiceImpl implements UsuarioService {
 
     final UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder encoder;
 
     public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -37,6 +43,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Transactional
     public void save(UsuarioDto novoUsuarioDto) {
+        String pass = novoUsuarioDto.getSenha();
+        novoUsuarioDto.setSenha(encoder.encode(pass));
         usuarioRepository.save(novoUsuarioDto.convertToUsuario());
     }
 
