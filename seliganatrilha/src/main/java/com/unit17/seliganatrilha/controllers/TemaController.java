@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,8 +25,15 @@ public class TemaController {
     }
 
     @GetMapping
-    public List<Tema> findAll() {
-        return temaService.findAll();
+    public ResponseEntity<Object> findByNome(@RequestParam(required = false) String nome) {
+        if(nome == null){
+            return ResponseEntity.status(HttpStatus.OK).body(temaService.findAll());
+        }
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(temaService.findByNome(nome));
+        } catch (TemaNaoEncontradoException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/{id}/aulas")
@@ -68,12 +76,5 @@ public class TemaController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping("/{nome}")
-    public ResponseEntity<Object> findByNome(@PathVariable(value = "nome") String nome) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(temaService.findByNome(nome));
-        } catch (TemaNaoEncontradoException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
+
 }
