@@ -26,11 +26,18 @@ public class TrilhaController {
     }
 
     @GetMapping
-    public List<Trilha> findAll(){
-        return trilhaService.findAll();
+    public ResponseEntity<Object> findByName(@RequestParam(required = false) String nome){
+        if (nome == null) {
+            return ResponseEntity.status(HttpStatus.OK).body(trilhaService.findAll());
+        }
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(trilhaService.findByName(nome));
+        } catch (TrilhaNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Trilha> findById(@PathVariable (value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(trilhaService.findById(id));
     }
@@ -66,12 +73,4 @@ public class TrilhaController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); //HTTP returns 204 - NO_CONTENT
     }
 
-    @GetMapping("/nome/{nome}")
-    public ResponseEntity<Object> findByName(@PathVariable(value = "nome") String nome){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(trilhaService.findByName(nome));
-        } catch (TrilhaNaoEncontradaException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
 }
