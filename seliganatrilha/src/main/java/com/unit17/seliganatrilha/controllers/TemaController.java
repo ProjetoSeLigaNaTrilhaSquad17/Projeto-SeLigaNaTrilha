@@ -2,14 +2,12 @@ package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.exceptions.TemaNaoEncontradoException;
 import com.unit17.seliganatrilha.models.Aula;
-import com.unit17.seliganatrilha.models.Tema;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.service.TemaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.UUID;
 

@@ -5,7 +5,7 @@ import com.unit17.seliganatrilha.exceptions.TrilhaNaoEncontradaException;
 import com.unit17.seliganatrilha.models.Avaliacao;
 import com.unit17.seliganatrilha.models.Trilha;
 
-import java.util.List;
+
 import java.util.Set;
 import java.util.UUID;
 

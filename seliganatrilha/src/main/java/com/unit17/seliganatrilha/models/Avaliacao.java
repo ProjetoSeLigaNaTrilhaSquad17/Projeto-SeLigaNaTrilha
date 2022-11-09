@@ -21,7 +21,7 @@ public class Avaliacao{
     @Type(type="org.hibernate.type.UUIDCharType")
     private UUID id;
 
-    @Column(name = "comentario")
+    @Column(name = "comentario", columnDefinition = "TEXT") //ColumnDefinition para o campo aceitar textos longos.
     private String comentario;
 
     @Column(name = "nota", nullable = false)

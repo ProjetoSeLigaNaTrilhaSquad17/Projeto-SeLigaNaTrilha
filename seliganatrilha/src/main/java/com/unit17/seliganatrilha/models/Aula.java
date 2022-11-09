@@ -27,7 +27,7 @@ public class Aula {
     @NotBlank
     private String titulo;
 
-    @Column
+    @Column(columnDefinition = "TEXT") //ColumnDefinition para o campo aceitar textos longos.
     @NotBlank
     private String texto;
 
