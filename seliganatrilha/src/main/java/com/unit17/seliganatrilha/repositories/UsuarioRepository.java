@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
-    @Query("SELECT e FROM Usuario e JOIN FETCH e.roles WHERE e.email= (:email)")
-    public Usuario findByEmail(@Param("email") String email);
+
+    Usuario findByEmail(String email);
     boolean existsByEmail(String Email);
 }

@@ -26,9 +26,9 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        //obtem o token da request com AUTHORIZATION
+
         String token =  request.getHeader(JWTCreator.HEADER_AUTHORIZATION);
-        //esta implementação só esta validando a integridade do token
+
         try {
             if(token!=null && !token.isEmpty()) {
                 JWTObject tokenObject = JWTCreator.create(token,WebSecurityConfig.PREFIX, WebSecurityConfig.KEY);

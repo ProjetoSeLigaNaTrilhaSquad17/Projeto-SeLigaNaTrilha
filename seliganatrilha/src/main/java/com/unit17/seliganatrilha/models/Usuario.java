@@ -35,14 +35,16 @@ public class Usuario{
     private Set<Trilha> trilhas = new HashSet<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "TB_USUARIO_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role_id")
+    @CollectionTable(name = "TB_USUARIO_ROLES", joinColumns = @JoinColumn(name = "USER_ID"))
+    
+    @Column(name = "ROLE_ID", nullable = false)
     private List<String> roles = new ArrayList<>();
 
-    public Usuario(String nome, String email, String cpf, String senha) {
+    public Usuario(String nome, String email, String cpf, String senha, List <String> roles) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.senha = senha;
+        roles.stream().map(i ->this.roles.add(i));
     }
 }

@@ -17,16 +17,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Getter
 @Setter
 @EnableWebSecurity
-@ConfigurationProperties(prefix = "security.config")
+//@ConfigurationProperties(prefix = "security.config")
 public class WebSecurityConfig {
-    public static String PREFIX;
-    public static String KEY;
-    public static long EXPIRATION;
+    public static String PREFIX = "Bearer";
+    public static String KEY = "SECRET_KEY";
+    public static long EXPIRATION = 3600000;
 
     @Bean
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
+
+    private static final String[] SWAGGER_WHITELIST = {
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**"
+    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception {
@@ -35,8 +45,11 @@ public class WebSecurityConfig {
                 .and()
                 .addFilterAfter(new JWTFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests()
+                .antMatchers(HttpMethod.GET,"/").permitAll()
+                .antMatchers(SWAGGER_WHITELIST).permitAll()
                 .antMatchers(HttpMethod.POST,"/usuario").permitAll()
-                .antMatchers(HttpMethod.GET, "/usuario").hasAnyRole("USER","ADMIN")
+                .antMatchers(HttpMethod.GET, "/usuario").permitAll()
+                .antMatchers(HttpMethod.POST,"/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();

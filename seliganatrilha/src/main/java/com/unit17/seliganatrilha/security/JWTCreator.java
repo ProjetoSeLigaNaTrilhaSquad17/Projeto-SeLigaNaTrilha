@@ -29,7 +29,7 @@ public class JWTCreator {
         object.setSubject(claims.getSubject());
         object.setExpiration(claims.getExpiration());
         object.setIssuedAt(claims.getIssuedAt());
-        object.setRoles((String) claims.get(ROLES_AUTHORITIES));
+        object.setRoles((List) claims.get(ROLES_AUTHORITIES));
         return object;
 
     }
