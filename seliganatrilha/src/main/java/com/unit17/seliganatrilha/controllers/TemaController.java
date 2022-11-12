@@ -2,7 +2,6 @@ package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.exceptions.TemaNaoEncontradoException;
 import com.unit17.seliganatrilha.models.Aula;
-import com.unit17.seliganatrilha.models.Tema;
 import com.unit17.seliganatrilha.models.Trilha;
 import com.unit17.seliganatrilha.service.TemaService;
 import org.springframework.http.HttpStatus;
@@ -24,8 +23,15 @@ public class TemaController {
     }
 
     @GetMapping
-    public List<Tema> findAll() {
-        return temaService.findAll();
+    public ResponseEntity<Object> findByNome(@RequestParam(required = false) String nome) {
+        if(nome == null){
+            return ResponseEntity.status(HttpStatus.OK).body(temaService.findAll());
+        }
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(temaService.findByNome(nome));
+        } catch (TemaNaoEncontradoException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/{id}/aulas")
@@ -68,12 +74,5 @@ public class TemaController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping("/{nome}")
-    public ResponseEntity<Object> findByNome(@PathVariable(value = "nome") String nome) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(temaService.findByNome(nome));
-        } catch (TemaNaoEncontradoException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
+
 }

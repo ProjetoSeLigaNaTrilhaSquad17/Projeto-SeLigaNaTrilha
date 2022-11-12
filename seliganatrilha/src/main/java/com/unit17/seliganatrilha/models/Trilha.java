@@ -27,7 +27,7 @@ public class Trilha {
     @Column(nullable = false, unique = true)
     private String nome;
     
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT") //ColumnDefinition para o campo aceitar textos longos.
     private String descricao;
     
     @Column(nullable = false)
