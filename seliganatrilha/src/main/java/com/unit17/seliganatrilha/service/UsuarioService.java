@@ -16,6 +16,7 @@ public interface UsuarioService {
 
     void save(UsuarioDto novoUsuarioDto);
 
+
     void update(UUID id, UsuarioDto novoUsuario);
 
     void delete(UUID id);

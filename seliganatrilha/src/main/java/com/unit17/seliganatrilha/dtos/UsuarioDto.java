@@ -7,6 +7,8 @@ import com.unit17.seliganatrilha.models.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class UsuarioDto {
@@ -23,7 +25,10 @@ public class UsuarioDto {
     @Size(min = 4, message = "A senha precisa ter no mínimo 4 caracteres")
     private String senha;
 
+    @NotBlank
+    private List<String> roles;
+
     public Usuario convertToUsuario(){
-        return new Usuario(this.nome, this.email, this.cpf, this.senha);
+        return new Usuario(this.nome, this.email, this.cpf, this.senha,this.roles);
     }
 }
