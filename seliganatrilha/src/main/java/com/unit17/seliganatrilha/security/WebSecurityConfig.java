@@ -30,25 +30,24 @@ public class WebSecurityConfig {
 
     private static final String[] SWAGGER_WHITELIST = {
             "/v2/api-docs",
+            "/v3/**",
             "/swagger-resources",
             "/swagger-resources/**",
             "/configuration/ui",
             "/configuration/security",
-            "/swagger-ui.html",
+            "/swagger-ui/**",
             "/webjars/**"
     };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception {
         http
-                .httpBasic()
-                .and()
+
                 .addFilterAfter(new JWTFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET,"/").permitAll()
                 .antMatchers(SWAGGER_WHITELIST).permitAll()
                 .antMatchers(HttpMethod.POST,"/usuario").permitAll()
-                .antMatchers(HttpMethod.GET, "/usuario").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
