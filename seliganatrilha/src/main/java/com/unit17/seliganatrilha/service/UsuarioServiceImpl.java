@@ -41,6 +41,15 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario.get();
     }
 
+    @Override
+    public Usuario findByEmail(String email) {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if (usuario.isEmpty()) {
+            throw new UsuarioNaoEncontradoException();
+        }
+        return usuario.get();
+    }
+
     @Transactional
     public void save(UsuarioDto novoUsuarioDto) {
         String pass = novoUsuarioDto.getSenha();
