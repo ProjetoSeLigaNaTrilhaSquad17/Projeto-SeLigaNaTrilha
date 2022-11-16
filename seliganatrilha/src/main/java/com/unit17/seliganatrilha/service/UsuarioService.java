@@ -14,8 +14,9 @@ public interface UsuarioService {
 
     Usuario findById(UUID id);
 
-    void save(UsuarioDto novoUsuarioDto);
+    Usuario findByEmail(String email);
 
+    void save(UsuarioDto novoUsuarioDto);
 
     void update(UUID id, UsuarioDto novoUsuario);
 
