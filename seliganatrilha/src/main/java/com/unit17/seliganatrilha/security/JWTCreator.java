@@ -1,6 +1,4 @@
 package com.unit17.seliganatrilha.security;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -4,7 +4,6 @@ package com.unit17.seliganatrilha.security;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
