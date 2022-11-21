@@ -60,7 +60,7 @@ public class TrilhaController {
         } catch (TrilhaNaoEncontradaException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); //HTTP returns 404 - NOT_FOUND
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).build(); //HTTP returns 202 - Accepted
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Trilha atualizada com sucesso"); //HTTP returns 202 - Accepted
     }
     
     @DeleteMapping("/{id}")
@@ -71,6 +71,16 @@ public class TrilhaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); //HTTP returns 404 - NOT_FOUND
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); //HTTP returns 204 - NO_CONTENT
+    }
+
+    @PutMapping("/validar/{id}")
+    public ResponseEntity<String> validar(@PathVariable (value = "id")UUID id) {
+        try {
+            trilhaService.validar(id);
+        } catch (TrilhaNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Trilha validada com sucesso");
     }
 
 }

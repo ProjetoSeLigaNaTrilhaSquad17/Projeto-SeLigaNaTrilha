@@ -23,4 +23,6 @@ public interface TrilhaService {
     List<Trilha> findByName(String name);
 
     Set<Avaliacao> findAvaliacoes(UUID id);
+
+    void validar(UUID id);
 }

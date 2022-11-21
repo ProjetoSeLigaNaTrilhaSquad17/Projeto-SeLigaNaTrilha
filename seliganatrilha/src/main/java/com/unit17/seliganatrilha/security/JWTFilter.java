@@ -50,7 +50,6 @@ public class JWTFilter extends OncePerRequestFilter {
         }catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException e) {
             e.printStackTrace();
             response.setStatus(HttpStatus.FORBIDDEN.value());
-            return;
         }
     }
     private List<SimpleGrantedAuthority> authorities(List<String> roles){

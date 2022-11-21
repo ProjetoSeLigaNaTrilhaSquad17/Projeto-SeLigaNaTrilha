@@ -45,10 +45,11 @@ public class WebSecurityConfig {
 
                 .addFilterAfter(new JWTFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                .antMatchers(HttpMethod.GET,"/").permitAll()
+                .antMatchers(HttpMethod.GET,"/").authenticated()
                 .antMatchers(SWAGGER_WHITELIST).permitAll()
                 .antMatchers(HttpMethod.POST,"/usuario").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
+                .antMatchers(HttpMethod.PUT, "/trilha/validar").hasRole("curador")
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();

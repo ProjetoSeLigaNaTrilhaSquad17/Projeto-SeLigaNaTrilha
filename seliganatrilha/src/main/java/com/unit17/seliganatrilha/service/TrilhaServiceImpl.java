@@ -41,13 +41,9 @@ public class TrilhaServiceImpl implements TrilhaService {
 
     @Transactional
     public void update(UUID id, TrilhaDto novaTrilha) {
-        Optional<Trilha> trilha = trilhaRepository.findById(id);
-        if(trilha.isEmpty()) {
-            throw new TrilhaNaoEncontradaException();
-        }
-        Trilha antigaTrilha = trilha.get();
-        antigaTrilha.setNome(novaTrilha.getNome());
-        antigaTrilha.setDescricao(novaTrilha.getDescricao());
+        Trilha trilha = findById(id);
+        trilha.setNome(novaTrilha.getNome());
+        trilha.setDescricao(novaTrilha.getDescricao());
     }
 
     @Transactional
@@ -79,6 +75,12 @@ public class TrilhaServiceImpl implements TrilhaService {
     @Override
     public Set<Avaliacao> findAvaliacoes(UUID id) {
         return findById(id).getAvaliacoes();
+    }
+
+    @Transactional
+    public void validar(UUID id) {
+        Trilha trilha = findById(id);
+        trilha.setStatus(true);
     }
 
 }
