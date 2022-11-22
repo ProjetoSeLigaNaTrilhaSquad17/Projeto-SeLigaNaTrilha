@@ -9,7 +9,9 @@ import com.unit17.seliganatrilha.security.WebSecurityConfig;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class LoginServiceImpl implements LoginService{
@@ -32,10 +34,12 @@ public class LoginServiceImpl implements LoginService{
         SessaoDto sessao = new SessaoDto();
         sessao.setLogin(usuario.getEmail());
 
+        List<String> rolesList = new ArrayList<>();
+        rolesList.add(usuario.getRoles());
         JWTObject jwtObject = new JWTObject();
         jwtObject.setIssuedAt(new Date(System.currentTimeMillis()));
         jwtObject.setExpiration((new Date(System.currentTimeMillis() + WebSecurityConfig.EXPIRATION)));
-        jwtObject.setRoles(usuario.getRoles());
+        jwtObject.setRoles(rolesList);
         sessao.setToken(JWTCreator.create(WebSecurityConfig.PREFIX, WebSecurityConfig.KEY, jwtObject));
         return sessao;
     }

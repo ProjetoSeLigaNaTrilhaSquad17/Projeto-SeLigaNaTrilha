@@ -26,7 +26,7 @@ public class UsuarioDto {
     private String senha;
 
     @NotBlank
-    private List<String> roles;
+    private String roles;
 
     public Usuario convertToUsuario(){
         return new Usuario(this.nome, this.email, this.cpf, this.senha,this.roles);
