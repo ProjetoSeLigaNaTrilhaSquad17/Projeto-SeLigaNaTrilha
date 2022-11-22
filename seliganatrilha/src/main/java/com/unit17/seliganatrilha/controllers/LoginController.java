@@ -1,12 +1,8 @@
 package com.unit17.seliganatrilha.controllers;
 
 import com.unit17.seliganatrilha.dtos.LoginDto;
-import com.unit17.seliganatrilha.dtos.SessaoDto;
+
 import com.unit17.seliganatrilha.exceptions.UsuarioNaoEncontradoException;
-import com.unit17.seliganatrilha.models.Usuario;
-import com.unit17.seliganatrilha.repositories.UsuarioRepository;
-import com.unit17.seliganatrilha.security.JWTCreator;
-import com.unit17.seliganatrilha.security.JWTObject;
 import com.unit17.seliganatrilha.security.WebSecurityConfig;
 import com.unit17.seliganatrilha.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.Date;
 @RestController
 public class LoginController {
     @Autowired
