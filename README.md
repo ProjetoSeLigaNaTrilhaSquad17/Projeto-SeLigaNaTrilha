@@ -13,7 +13,7 @@ Em desenvolvimento
 - [✅] Atualizar Trilha
 - [✅] Cadastro de aulas das trilhas
 - [✅] Atualizar aulas
-- [❌] Validação de trilhas pelo usuário curador
+- [✅] Validação de trilhas pelo usuário curador
 - [✅] Listar Trilhas
 - [✅] Buscar Trilha por Id
 - [✅] Listar Trilhas por Tema

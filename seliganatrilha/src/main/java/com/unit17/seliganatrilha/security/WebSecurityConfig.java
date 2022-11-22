@@ -49,7 +49,7 @@ public class WebSecurityConfig {
                 .antMatchers(SWAGGER_WHITELIST).permitAll()
                 .antMatchers(HttpMethod.POST,"/usuario").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
-                .antMatchers(HttpMethod.PUT, "/trilha/validar").hasRole("curador")
+                .antMatchers(HttpMethod.PUT, "/trilha/validar/*").hasRole("curador")
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
